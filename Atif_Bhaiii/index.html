@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Happy 23rd Birthday Atif! 🦇💖 | Pookie Batman</title>
+  
+  <meta name="description" content="A special Pookie Batman birthday adventure crafted for Atif's 23rd birthday!">
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+  <!-- Favicon: Hot Pink Bat SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FF3D9A'%3E%3Cpath d='M12 4.5C10.5 4.5 9 6 8 8C7 5 5 4.5 4 4.5C2 4.5 1 6.5 1 9C1 15 8 19.5 12 19.5C16 19.5 23 15 23 9C23 6.5 22 4.5 20 4.5C19 4.5 17 5 16 8C15 6 13.5 4.5 12 4.5Z'/%3E%3C/svg%3E">
+  
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css?v=3">
+</head>
+<body>
+
+  <!-- FX Canvases -->
+  <canvas id="confetti-canvas"></canvas>
+  <canvas id="fireworks-canvas"></canvas>
+
+  <!-- Bat Swarm Black Wipe Overlay -->
+  <div id="bat-swarm-overlay" aria-hidden="true"></div>
+
+  <!-- Lightning Overlay (For Batman NO response) -->
+  <div id="lightning-flash" aria-hidden="true"></div>
+
+  <!-- Fixed Top-Right Batman Cowl Logo (Reloads site) -->
+  <button id="btn-reload-logo" class="btn-bat-cowl" aria-label="Restart Mission" title="Restart Mission">
+    <svg viewBox="0 0 100 100" class="bat-cowl-icon">
+      <path d="M22 15 L36 44 C42 41 58 41 64 44 L78 15 C74 48 84 56 82 82 C80 94 68 96 50 96 C32 96 20 94 18 82 C16 56 26 48 22 15 Z" fill="#000000" stroke="#FF3D9A" stroke-width="5"/>
+      <polygon points="32,58 45,63 43,68 30,62" fill="#FFFFFF"/>
+      <polygon points="68,58 55,63 57,68 70,62" fill="#FFFFFF"/>
+    </svg>
+  </button>
+
+  <!-- ================= SCENE 1: INTRO VIDEO (OPENS DIRECTLY) ================= -->
+  <section id="scene-1" class="scene-container active">
+    <div class="intro-video-wrapper">
+      <div class="rotate-hint">🔄 Rotate phone for the best view!</div>
+      
+      <!-- Video requests audio playback automatically on open -->
+      <video 
+        id="intro-video-player" 
+        class="video-expand-entrance"
+        src="photos/Car_drifting.mp4"
+        autoplay 
+        playsinline 
+        webkit-playsinline 
+        preload="auto">
+        <source src="photos/Car_drifting.mp4" type="video/mp4">
+      </video>
+    </div>
+  </section>
+
+  <!-- ================= SCENE 2: CAKE & CANDLE BLOW ================= -->
+  <section id="scene-2" class="scene-container safe-area">
+    <h2 class="cake-heading">Make a wish! 🎂</h2>
+    <p id="cake-instruction-text" class="cake-instruction">
+      <span>Tap below to blow the candles</span> 🕯️
+    </p>
+
+    <div id="cake-box" class="cake-container">
+      <img id="cake-img" src="photos/cake.png" alt="Pookie Birthday Cake" class="cake-image blend-pure-black">
+      <img id="cake-blown-img" src="photos/cake_blown.png" alt="Blown Birthday Cake" class="cake-image cake-blown-layer blend-pure-black">
+      
+      <!-- Smoke wisps layer (rising when candles blown) -->
+      <div id="smoke-layer" class="smoke-layer" aria-hidden="true">
+        <div class="smoke-puff" style="left: 20%; animation-delay: 0s;"></div>
+        <div class="smoke-puff" style="left: 40%; animation-delay: 0.3s;"></div>
+        <div class="smoke-puff" style="left: 60%; animation-delay: 0.6s;"></div>
+        <div class="smoke-puff" style="left: 75%; animation-delay: 0.2s;"></div>
+      </div>
+    </div>
+
+    <!-- Primary Style: Hot pink #FF3D9A background, white text -->
+    <button id="btn-blow-candles" class="btn-primary btn-pulse">
+      Tap to blow 🕯️
+    </button>
+  </section>
+
+  <!-- ================= SCENE 3: HAPPY / ANGRY BATMAN ================= -->
+  <section id="scene-3" class="scene-container safe-area">
+    <div id="batman-bubble" class="speech-bubble">
+      Want to see what's next? 🦇🎀
+    </div>
+
+    <div class="batman-container">
+      <img 
+        id="batman-character-img" 
+        src="photos/Happy_batman.png" 
+        alt="Lego Batman" 
+        class="batman-img batman-happy blend-pure-black">
+    </div>
+
+    <div class="batman-btn-group">
+      <button id="btn-batman-yes" class="btn-primary">
+        YES! 💕
+      </button>
+      <button id="btn-batman-no" class="btn-secondary">
+        NO 🙅‍♂️
+      </button>
+      <button id="btn-try-again" class="btn-primary">
+        Try again 🥺
+      </button>
+    </div>
+  </section>
+
+  <!-- ================= SCENE 4: GIFT BOXES ================= -->
+  <section id="scene-4" class="scene-container safe-area">
+    <div class="gifts-header">
+      <h2 class="gifts-title">Pick a gift 🎁</h2>
+      <p class="gifts-subtitle">Open all 5 boxes to unlock the grand finale!</p>
+    </div>
+
+    <!-- 5 Floating Gift Boxes -->
+    <div id="gift-grid" class="gift-boxes-grid"></div>
+
+    <!-- Grand Surprise Button (Revealed only after all 5 are opened) -->
+    <div id="final-surprise-wrapper">
+      <button id="btn-final-surprise" class="btn-primary btn-pulse">
+        <!-- Injected from CONFIG.finalButtonText -->
+        maro laddu kavala nayana? 💖
+      </button>
+    </div>
+  </section>
+
+  <!-- ================= GIFT MODAL: LETTER WITH POLAROIDS AT THE END ================= -->
+  <div id="gift-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-content-card">
+      <div class="letter-scroll-wrapper">
+        <div class="letter-paper">
+          <div class="letter-wax-seal">🦇🎀</div>
+          <div id="modal-letter-content"></div>
+
+          <!-- Polaroid Memory Gallery at the LAST of the letter -->
+          <div class="letter-memories-section">
+            <div class="memories-title">📸 Theepi gnapakalu</div>
+            <div id="modal-memories-gallery" class="polaroid-gallery">
+              <!-- Polaroids injected here -->
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button id="btn-close-modal" class="btn-secondary">
+            Back to gifts 🎁
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= LIGHTBOX MODAL ================= -->
+  <div id="lightbox-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="lightbox-card">
+      <div id="lightbox-box" class="lightbox-box">
+        <div id="lightbox-fallback" class="polaroid-fallback-graphic" style="display: none;">🦇</div>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Enlarged Memory">
+      </div>
+      <div id="lightbox-caption" class="lightbox-caption"></div>
+    </div>
+    <button id="btn-close-lightbox" class="btn-secondary" style="margin-top: 15px;">
+      Close ✕
+    </button>
+  </div>
+
+  <!-- ================= SCENE 5: FINAL VIDEO (DIRECT PLAY) ================= -->
+  <section id="scene-5" class="scene-container">
+    
+    <!-- Video Player Layer -->
+    <div id="final-video-container" class="final-video-container">
+      
+      <!-- Back to gifts button: always available during & after video -->
+      <button id="btn-back-to-gifts" class="btn-secondary btn-final-back-corner">
+        Back to gifts 🎁
+      </button>
+
+      <video 
+        id="final-video-player" 
+        src="photos/final_video.mp4"
+        playsinline 
+        webkit-playsinline 
+        controls
+        preload="auto">
+        <source src="photos/final_video.mp4" type="video/mp4">
+      </video>
+
+      <!-- Fallback card if final video file is not yet added -->
+      <div id="final-video-fallback" class="final-video-placeholder" style="display: none;">
+        <h3 class="final-placeholder-title">🎬 Final Video</h3>
+        <p class="final-placeholder-desc">
+          Upload your video as <code>photos/final_video.mp4</code> or <code>final_video.mp4</code>.<br>
+          It will directly play right here!
+        </p>
+        <button id="btn-fallback-back-to-gifts" class="btn-primary">
+          Back to gifts 🎁
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scripts -->
+  <script src="audio.js?v=16"></script>
+  <script src="confetti.js?v=16"></script>
+  <script src="app.js?v=16"></script>
+</body>
+</html>

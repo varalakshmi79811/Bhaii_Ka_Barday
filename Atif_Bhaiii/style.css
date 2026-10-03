@@ -1,0 +1,1072 @@
+/* ==========================================================================
+   POOKIE BATMAN - BIRTHDAY WEBSITE STYLESHEET (V2)
+   Theme: Gotham Pitch Black (#000000) + Hot Pink (#FF3D9A) + Soft Pink (#FFC1DD) + Yellow Accent (#FFD84D)
+   Pure black base everywhere with NO ambient pink halos or glow vignettes.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@600;700;800&family=Outfit:wght@400;500;700&display=swap');
+
+:root {
+  --bg-black: #000000;
+  --hot-pink: #FF3D9A;
+  --hot-pink-hover: #ff5ca7;
+  --soft-pink: #FFC1DD;
+  --accent-yellow: #FFD84D;
+  --dark-surface: #1E1E2A;
+  --dark-surface-hover: #292938;
+  --cream-paper: #fffdf5;
+  --ink-color: #241c22;
+  --text-white: #ffffff;
+  
+  --font-display: 'Fredoka', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-handwriting: 'Caveat', cursive, sans-serif;
+  --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ================= RESET & BASE ================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-black);
+  color: var(--text-white);
+  font-family: var(--font-body);
+  overflow: hidden;
+  position: fixed;
+}
+
+/* Mobile Safe Area Insets */
+.safe-area {
+  padding-top: max(16px, env(safe-area-inset-top));
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+  padding-left: max(16px, env(safe-area-inset-left));
+  padding-right: max(16px, env(safe-area-inset-right));
+}
+
+/* FX Canvases */
+#confetti-canvas, #fireworks-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 99;
+}
+#fireworks-canvas {
+  z-index: 90;
+}
+
+/* Bat Swarm Black Wipe Overlay */
+#bat-swarm-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: #000000;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 115;
+}
+
+/* Lightning Overlay for Angry Batman */
+#lightning-flash {
+  position: fixed;
+  inset: 0;
+  background-color: #ffffff;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 110;
+}
+
+.lightning-strike {
+  animation: lightningAnim 0.45s ease-out;
+}
+
+@keyframes lightningAnim {
+  0% { opacity: 0; }
+  15% { opacity: 1; }
+  30% { opacity: 0.2; }
+  55% { opacity: 0.95; }
+  100% { opacity: 0; }
+}
+
+/* Screen Shake for Angry Batman */
+.shake-screen {
+  animation: screenViolentShake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes screenViolentShake {
+  10%, 90% { transform: translate3d(-3px, -2px, 0); }
+  20%, 80% { transform: translate3d(5px, 4px, 0); }
+  30%, 50%, 70% { transform: translate3d(-6px, -5px, 0); }
+  40%, 60% { transform: translate3d(6px, 5px, 0); }
+}
+
+/* ================= CLEAN BUTTON STYLING (NO GLOW HALOS) ================= */
+
+/* Primary Button: Hot pink #FF3D9A, text white */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: var(--hot-pink);
+  border: none;
+  border-radius: 9999px;
+  padding: 14px 34px;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  transition: transform 0.15s ease, background-color 0.2s ease, box-shadow 0.15s ease;
+  outline: none;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary:hover {
+  background-color: var(--hot-pink-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
+}
+
+.btn-primary:active {
+  transform: translateY(2px) scale(0.97);
+}
+
+/* Secondary Button: Dark surface #1E1E2A, text white, 2px pink border */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: var(--dark-surface);
+  border: 2px solid var(--hot-pink);
+  border-radius: 9999px;
+  padding: 12px 28px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease;
+  outline: none;
+}
+
+.btn-secondary:hover {
+  background-color: var(--dark-surface-hover);
+  border-color: var(--hot-pink-hover);
+  transform: translateY(-2px);
+}
+
+.btn-secondary:active {
+  transform: translateY(2px) scale(0.97);
+}
+
+/* Button pulse for primary actions */
+.btn-pulse {
+  animation: cleanButtonPulse 2s infinite ease-in-out;
+}
+
+@keyframes cleanButtonPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+/* ================= CORNER NAVIGATION BUTTONS ================= */
+
+/* Batman Cowl Face Logo (Top-Right Fixed) */
+.btn-bat-cowl {
+  position: fixed;
+  top: max(16px, env(safe-area-inset-top));
+  right: max(16px, env(safe-area-inset-right));
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--dark-surface);
+  border: 2px solid var(--hot-pink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 150;
+  padding: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-bat-cowl:hover {
+  transform: scale(1.1);
+  border-color: var(--accent-yellow);
+}
+
+.bat-cowl-icon {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ================= SCENE ARCHITECTURE ================= */
+.scene-container {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.4s ease;
+  z-index: 5;
+  overflow: hidden;
+  background-color: var(--bg-black);
+}
+
+.scene-container.active {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  z-index: 10;
+}
+
+/* ================= IMAGE BLENDING (NO PINK HALOS) ================= */
+.blend-pure-black {
+  mix-blend-mode: screen;
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, black 72%, transparent 99%);
+  mask-image: radial-gradient(circle at 50% 50%, black 72%, transparent 99%);
+  /* NO pink drop-shadow halo */
+}
+
+/* ================= SCENE 1: INTRO VIDEO ================= */
+#scene-1 {
+  padding: 0;
+  background-color: var(--bg-black);
+}
+
+.intro-video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-black);
+}
+
+#intro-video-player {
+  max-width: 100vw;
+  max-height: 100vh;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: var(--bg-black);
+}
+
+/* Intro Video Entrance: starts as narrow horizontal strip in center, then smoothly expands vertically */
+@keyframes videoEntranceExpand {
+  0% {
+    clip-path: inset(42% 0 42% 0);
+    transform: scale(1.15);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.video-expand-entrance {
+  animation: videoEntranceExpand 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Portrait orientation hint */
+.rotate-hint {
+  position: absolute;
+  top: max(20px, env(safe-area-inset-top));
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(30, 30, 42, 0.9);
+  border: 1.5px solid var(--hot-pink);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  display: none;
+  align-items: center;
+  gap: 8px;
+  z-index: 20;
+  animation: fadeInOut 5s forwards;
+}
+
+@media (orientation: portrait) and (max-width: 768px) {
+  .rotate-hint {
+    display: flex;
+  }
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translate(-50%, -10px); }
+  15% { opacity: 1; transform: translate(-50%, 0); }
+  80% { opacity: 1; }
+  100% { opacity: 0; pointer-events: none; }
+}
+
+/* ================= SCENE 2: CAKE & CANDLE BLOW ================= */
+#scene-cake {
+  text-align: center;
+  padding: 20px;
+}
+
+.cake-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 6vw, 3.2rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.cake-instruction {
+  font-size: clamp(1rem, 3.5vw, 1.25rem);
+  color: var(--soft-pink);
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.cake-container {
+  position: relative;
+  width: min(72vw, 370px);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto 30px;
+}
+
+.cake-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: cakeHover 3.5s infinite ease-in-out;
+  transition: opacity 0.8s ease, filter 0.8s ease;
+}
+
+.cake-blown-layer {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cake-container.is-blown .cake-blown-layer {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cake-container.is-blown #cake-img {
+  opacity: 0;
+}
+
+@keyframes cakeHover {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.smoke-layer {
+  position: absolute;
+  top: 10%;
+  left: 20%;
+  right: 20%;
+  height: 60px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.smoke-layer.active {
+  opacity: 1;
+}
+
+.smoke-puff {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: radial-gradient(circle, rgba(230, 230, 230, 0.7) 0%, rgba(180, 180, 180, 0.35) 50%, transparent 80%);
+  border-radius: 50%;
+  filter: blur(4px);
+  animation: smokeRise 2.2s infinite ease-out;
+}
+
+@keyframes smokeRise {
+  0% { transform: translateY(0) scale(0.6); opacity: 0.9; }
+  100% { transform: translateY(-80px) scale(2.5); opacity: 0; }
+}
+
+.mic-status-badge {
+  font-size: 0.88rem;
+  color: var(--soft-pink);
+  margin-top: 14px;
+}
+
+/* ================= SCENE 3: HAPPY / ANGRY BATMAN ================= */
+#scene-batman {
+  text-align: center;
+  padding: 20px;
+}
+
+.speech-bubble {
+  position: relative;
+  background: #ffffff;
+  color: #1a1a1a;
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 4vw, 1.65rem);
+  font-weight: 800;
+  padding: 16px 28px;
+  border-radius: 26px;
+  border: 3.5px solid var(--hot-pink);
+  margin: 0 auto 20px;
+  max-width: 90vw;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  transition: all 0.3s ease;
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 16px 12px 0;
+  border-style: solid;
+  border-color: var(--hot-pink) transparent;
+  display: block;
+  width: 0;
+}
+
+.speech-bubble.angry {
+  background: #ffe6e6;
+  border-color: #ff1744;
+  color: #c90022;
+}
+
+.speech-bubble.angry::after {
+  border-color: #ff1744 transparent;
+}
+
+.batman-container {
+  position: relative;
+  width: min(75vw, 350px);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto 30px;
+}
+
+.batman-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.batman-happy {
+  animation: pookieBounce 2.4s infinite ease-in-out;
+}
+
+@keyframes pookieBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Batman Happy Hop (YES button click) */
+@keyframes batmanHappyHop {
+  0% { transform: translateY(0) scale(1); }
+  30% { transform: translateY(-35px) scale(1.12) rotate(-3deg); }
+  55% { transform: translateY(0) scale(0.95); }
+  75% { transform: translateY(-18px) scale(1.06) rotate(3deg); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+.batman-hopping {
+  animation: batmanHappyHop 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+}
+
+.batman-angry {
+  animation: angryTremble 0.15s infinite;
+}
+
+@keyframes angryTremble {
+  0% { transform: translate(1px, 1px); }
+  50% { transform: translate(-1px, -2px); }
+  100% { transform: translate(-2px, 1px); }
+}
+
+.batman-btn-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+#btn-try-again {
+  display: none;
+  animation: gentleShake 1.2s infinite ease-in-out;
+}
+
+@keyframes gentleShake {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-3deg); }
+  75% { transform: rotate(3deg); }
+}
+
+/* ================= SCENE 4: GIFT BOXES ================= */
+#scene-gifts {
+  padding: 30px 20px;
+  text-align: center;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.gifts-header {
+  margin-bottom: 25px;
+  margin-top: 15px;
+}
+
+.gifts-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 6.5vw, 3.4rem);
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.gifts-subtitle {
+  font-size: 1.05rem;
+  color: var(--soft-pink);
+  margin-top: 6px;
+}
+
+.gift-boxes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(16px, 3.5vw, 36px);
+  max-width: 950px;
+  margin: 10px auto 40px;
+  padding: 10px;
+  width: 100%;
+}
+
+.gift-card {
+  position: relative;
+  width: clamp(135px, 28vw, 175px);
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gift-card:hover {
+  transform: scale(1.08) translateY(-4px);
+}
+
+.gift-card:active {
+  transform: scale(0.95);
+}
+
+.gift-box-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Staggered entrance from bottom */
+@keyframes floatUpEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(140px) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.gift-card.entering {
+  animation: floatUpEntrance 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Staggered bobbing */
+.gift-card:nth-child(1) { animation: floatBox1 3.2s infinite ease-in-out 0.0s; }
+.gift-card:nth-child(2) { animation: floatBox2 3.6s infinite ease-in-out -0.7s; }
+.gift-card:nth-child(3) { animation: floatBox1 3.4s infinite ease-in-out -1.4s; }
+.gift-card:nth-child(4) { animation: floatBox2 3.8s infinite ease-in-out -2.1s; }
+.gift-card:nth-child(5) { animation: floatBox1 3.5s infinite ease-in-out -2.8s; }
+
+@keyframes floatBox1 {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-12px) rotate(2deg); }
+}
+
+@keyframes floatBox2 {
+  0%, 100% { transform: translateY(-6px) rotate(2deg); }
+  50% { transform: translateY(6px) rotate(-2deg); }
+}
+
+.sparkle-dot {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: var(--accent-yellow);
+  border-radius: 50%;
+  animation: sparkleTwinkle 2s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes sparkleTwinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.6); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+.opened-badge {
+  position: absolute;
+  bottom: 0px;
+  background: #10b981;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  display: none;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+  z-index: 5;
+}
+
+.gift-card.opened .opened-badge {
+  display: flex;
+}
+
+.box-bursting {
+  animation: boxBurstShake 0.5s ease-in-out !important;
+}
+
+@keyframes boxBurstShake {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.15) rotate(-5deg); }
+  50% { transform: scale(1.22) rotate(5deg); }
+  75% { transform: scale(1.12) rotate(-2deg); }
+  100% { transform: scale(1); }
+}
+
+/* Final Button Wrapper */
+#final-surprise-wrapper {
+  margin-top: 15px;
+  margin-bottom: 40px;
+  display: none;
+  opacity: 0;
+  transform: translateY(20px) scale(0.9);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#final-surprise-wrapper.revealed {
+  display: block;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ================= 95% SCREEN WIDE LETTER MODAL ================= */
+#gift-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  background: rgba(0, 0, 0, 0.92);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(8px, 1.5vw, 18px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#gift-modal.active {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-content-card {
+  background: #111116;
+  border: 2px solid var(--hot-pink);
+  border-radius: 24px;
+  width: 96vw;
+  max-width: 1120px;
+  height: 94vh;
+  max-height: 94vh;
+  padding: clamp(16px, 2.5vw, 32px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.95);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.letter-scroll-wrapper {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-right: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Wide Horizontal Letter Card */
+.letter-paper {
+  background-color: var(--cream-paper);
+  color: var(--ink-color);
+  font-family: var(--font-handwriting);
+  font-size: clamp(1.45rem, 2.4vw, 1.95rem);
+  line-height: 1.65;
+  padding: clamp(24px, 4vw, 48px);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  width: 100%;
+  white-space: pre-line;
+  background-image: linear-gradient(#e8e3d4 1px, transparent 1px);
+  background-size: 100% 1.65em;
+  background-position: 0 1.2em;
+  position: relative;
+}
+
+.letter-wax-seal {
+  float: right;
+  font-size: 2.6rem;
+  margin-left: 14px;
+  margin-bottom: 10px;
+}
+
+/* Memories Row / Polaroid Gallery AT THE LAST OF THE LETTER */
+.letter-memories-section {
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 2px dashed rgba(255, 61, 154, 0.45);
+}
+
+.memories-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  font-weight: 700;
+  color: #111116;
+  margin-bottom: 26px;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.polaroid-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 28px 24px;
+  width: 100%;
+  padding: 8px 4px 20px;
+}
+
+.modal-footer {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0 4px;
+}
+
+.polaroid-card {
+  background: #ffffff;
+  padding: 14px 14px 22px;
+  border-radius: 6px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+  width: clamp(210px, 26vw, 290px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.polaroid-card:hover {
+  transform: scale(1.06) rotate(0deg) !important;
+  box-shadow: 0 18px 36px rgba(255, 61, 154, 0.35);
+  z-index: 10;
+}
+
+.washi-tape {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 64px;
+  height: 22px;
+  background: rgba(255, 61, 154, 0.75);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+}
+
+.polaroid-img-box {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: #221c25;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.polaroid-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.polaroid-card:hover .polaroid-img {
+  transform: scale(1.04);
+}
+
+.polaroid-fallback-graphic {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  color: #fff;
+}
+
+.polaroid-caption {
+  display: none !important;
+}
+
+/* Staggered drops */
+.polaroid-card:nth-child(1) { transform: rotate(-3deg); animation: polaroidDrop 0.5s ease 0.1s both; }
+.polaroid-card:nth-child(2) { transform: rotate(2.5deg); animation: polaroidDrop 0.5s ease 0.2s both; }
+.polaroid-card:nth-child(3) { transform: rotate(-2deg); animation: polaroidDrop 0.5s ease 0.3s both; }
+.polaroid-card:nth-child(4) { transform: rotate(3deg); animation: polaroidDrop 0.5s ease 0.4s both; }
+
+@keyframes polaroidDrop {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; }
+}
+
+/* Mobile & Tablet Layout for Letter Modal */
+@media (max-width: 860px) {
+  .modal-content-card {
+    width: 98vw;
+    height: 96vh;
+    max-height: 96vh;
+    padding: 14px 10px;
+  }
+  .letter-paper {
+    padding: 22px 18px;
+    font-size: 1.45rem;
+  }
+  .polaroid-gallery {
+    gap: 20px 14px;
+  }
+  .polaroid-card {
+    width: clamp(160px, 44vw, 240px);
+    padding: 10px 10px 18px;
+  }
+  .polaroid-caption {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .polaroid-card {
+    width: clamp(220px, 86vw, 300px);
+    padding: 12px 12px 20px;
+  }
+}
+
+/* ================= LIGHTBOX ZOOM MODAL ================= */
+#lightbox-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.95);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#lightbox-modal.active {
+  display: flex;
+}
+
+.lightbox-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 95vw;
+  max-height: 88vh;
+}
+
+.lightbox-box {
+  position: relative;
+  max-width: min(92vw, 680px);
+  max-height: min(78vh, 620px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 10px solid #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.9);
+  overflow: hidden;
+  background: #18131e;
+}
+
+.lightbox-content {
+  max-width: 100%;
+  max-height: min(74vh, 600px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.lightbox-caption {
+  display: none !important;
+}
+
+/* ================= SCENE 5: FINAL VIDEO & FIREWORKS ================= */
+#scene-5 {
+  padding: 0;
+  background: var(--bg-black);
+}
+
+.final-video-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-black);
+  z-index: 10;
+}
+
+#final-video-player {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.final-video-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 28px;
+  max-width: 500px;
+  background: var(--dark-surface);
+  border: 2px dashed var(--hot-pink);
+  border-radius: 20px;
+}
+
+.final-placeholder-title {
+  font-family: var(--font-display);
+  font-size: 1.65rem;
+  margin-bottom: 8px;
+  color: #ffffff;
+}
+
+.final-placeholder-desc {
+  font-size: 0.95rem;
+  color: var(--soft-pink);
+  margin-bottom: 22px;
+  line-height: 1.5;
+}
+
+/* Always-available Back to Gifts button in Scene 5 */
+.btn-final-back-corner {
+  position: absolute;
+  top: max(18px, env(safe-area-inset-top));
+  left: max(18px, env(safe-area-inset-left));
+  z-index: 30;
+}
+
+/* Celebration Stage after Video Ends */
+#celebration-stage {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  text-align: center;
+  padding: max(30px, env(safe-area-inset-bottom)) 20px;
+  z-index: 95;
+  background: transparent;
+  pointer-events: none;
+}
+
+#celebration-stage.active {
+  display: flex;
+}
+
+/* Small, elegant center-bottom text in white */
+.final-end-text {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 3.2vw, 1.45rem);
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  text-align: center;
+  margin-bottom: 22px;
+  pointer-events: auto;
+}
+
+.celebration-btn-group {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  pointer-events: auto;
+}
+
+/* ================= REDUCED MOTION ================= */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
